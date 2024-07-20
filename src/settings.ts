@@ -48,7 +48,9 @@ export type PluginSettings = {
     maxClusterRadiusPixels: number;
     searchProvider: 'osm' | 'google';
     searchDelayMs: number;
-    geocodingApiKey: string;
+    geocodingApiMethod?: 'key' | 'path';
+    geocodingApiKey?: string;
+    geocodingApiPath?: string;
     useGooglePlaces: boolean;
     saveHistory: boolean;
     queryForFollowActiveNote: string;
@@ -228,6 +230,7 @@ export const DEFAULT_SETTINGS: PluginSettings = {
     maxClusterRadiusPixels: 20,
     searchProvider: 'osm',
     searchDelayMs: 250,
+    geocodingApiMethod: 'key',
     geocodingApiKey: '',
     useGooglePlaces: false,
     mapSources: [

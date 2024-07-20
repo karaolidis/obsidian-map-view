@@ -2,7 +2,7 @@ import { request, App } from 'obsidian';
 import * as geosearch from 'leaflet-geosearch';
 import * as leaflet from 'leaflet';
 import queryString from 'query-string';
-
+import { readFileSync } from 'fs';
 import { type PluginSettings } from 'src/settings';
 import { UrlConvertor } from 'src/urlConvertor';
 import { FileMarker } from 'src/markers';
@@ -31,12 +31,16 @@ export class GeoSearcher {
     constructor(app: App, settings: PluginSettings) {
         this.settings = settings;
         this.urlConvertor = new UrlConvertor(app, settings);
+
+        const apiKey =
+            settings.geocodingApiMethod === 'key'
+                ? settings.geocodingApiKey
+                : readFileSync(settings.geocodingApiPath, 'utf-8').trim();
+
         if (settings.searchProvider == 'osm')
             this.searchProvider = new geosearch.OpenStreetMapProvider();
         else if (settings.searchProvider == 'google') {
-            this.searchProvider = new geosearch.GoogleProvider({
-                apiKey: settings.geocodingApiKey,
-            });
+            this.searchProvider = new geosearch.GoogleProvider({ apiKey });
         }
     }
 
@@ -119,10 +123,15 @@ export async function googlePlacesSearch(
 ): Promise<GeoSearchResult[]> {
     if (settings.searchProvider != 'google' || !settings.useGooglePlaces)
         return [];
-    const googleApiKey = settings.geocodingApiKey;
+
+    const apiKey =
+        settings.geocodingApiMethod === 'key'
+            ? settings.geocodingApiKey
+            : readFileSync(settings.geocodingApiPath, 'utf-8').trim();
+
     const params = {
         query: query,
-        key: googleApiKey,
+        key: apiKey,
     };
     if (centerOfSearch)
         (params as any)['location'] =
