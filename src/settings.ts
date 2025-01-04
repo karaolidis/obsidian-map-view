@@ -57,9 +57,11 @@ export type PluginSettings = {
     openIn?: OpenInSettings[];
     urlParsingRules?: UrlParsingRule[];
     mapControls?: MapControls;
-    maxClusterRadiusPixels: number;
+    maxClusterRadiusPixels?: number;
     searchProvider?: 'osm' | 'google';
+    geocodingApiMethod?: 'key' | 'path';
     geocodingApiKey?: string;
+    geocodingApiPath?: string;
     useGooglePlaces?: boolean;
     saveHistory?: boolean;
     queryForFollowActiveNote?: string;
@@ -212,6 +214,7 @@ export const DEFAULT_SETTINGS: PluginSettings = {
     },
     maxClusterRadiusPixels: 20,
     searchProvider: 'osm',
+    geocodingApiMethod: 'key',
     useGooglePlaces: false,
     mapSources: [
         {
