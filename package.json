@@ -52,7 +52,7 @@
         "core-js": "^3.39.0",
         "fast-xml-parser": "^4.5.0",
         "leaflet": "^1.9.4",
-        "leaflet-extra-markers": "github:coryasilva/Leaflet.ExtraMarkers",
+        "leaflet-extra-markers": "^1.2.2",
         "leaflet-fullscreen": "^1.0.2",
         "leaflet-geosearch": "^4.0.0",
         "leaflet.markercluster": "^1.5.3",
