@@ -13,7 +13,8 @@
         "moduleResolution": "node",
         "importHelpers": true,
         "allowImportingTsExtensions": true,
-        "lib": ["dom", "es2020", "scripthost"]
+        "lib": ["dom", "es2020", "scripthost"],
+        "outDir": "./dist"
     },
     "include": ["**/*.ts"]
 }
